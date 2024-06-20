@@ -27,6 +27,9 @@ If you have problems with password writeback for Microsoft Entra Connect, review
 * [Disable and re-enable the password writeback feature](#disable-and-re-enable-the-password-writeback-feature)
 * [Install the latest Microsoft Entra Connect release](#install-the-latest-azure-ad-connect-release)
 * [Troubleshoot password writeback](#common-password-writeback-errors)
+* [Check TLS version at or above 1.2]
+* [Make sure .net 4.8 or higher is enabled] 
+
 
 ### Confirm network connectivity
 
@@ -153,6 +156,21 @@ Microsoft Entra Connect requires AD DS **Reset password** permission to perform 
 1. Scroll down and look for **Reset password**. If the entry has a check mark, the AD DS account has permission to reset the password of the selected Active Directory user account.  
 
     :::image type="content" source="./media/troubleshoot-sspr-writeback/check-permissions.png" alt-text="Validating that the sync account has the Reset password permission" border="false":::
+## Check if TLS 1.2 is enabled
+![image](https://github.com/MicrosoftDocs/entra-docs/assets/171621864/66d87b8d-6849-438f-8b4b-a9b97674d53f)
+A very important additional troubleshooting step is to check that TLS 1.2 is enabled correctly on the Sync Server.
+Follow the below Docs to check TLS 1.2. This needs to be ran it in Admin Mode on PowerShell.
+![image](https://github.com/MicrosoftDocs/entra-docs/assets/171621864/389647c9-45e2-4254-be8e-d8fe08b33cd8)
+Document for PowerShell Script to check TLS 1.2 on Entra Connect Server.  ![image](https://github.com/MicrosoftDocs/entra-docs/assets/171621864/8469f18e-cd50-4e40-a1de-007955c9d07c)
+https://docs.microsoft.com/en-us/azure/active-directory/hybrid/reference-connect-tls-enforcement#powershell-script-to-check-tls-12
+
+## Make sure .net 4.8 or higher is enabled (Sync Server)
+![image](https://github.com/MicrosoftDocs/entra-docs/assets/171621864/7bee71e1-b086-4f0f-82bb-9c1d3039450c)
+Another troubleshooting step for SSPR is to check .net 4.8 or higher is enabled on the Sync Server.![image](https://github.com/MicrosoftDocs/entra-docs/assets/171621864/f0f9c99a-de06-4d9e-877d-e28fa74898af)
+
+-How to check that .NET is already installed: https://learn.microsoft.com/en-us/dotnet/core/install/how-to-detect-installed-versions?pivots=os-windows
+-Query the registry using PowerShell: https://learn.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed#query-the-registry-using-powershell
+-Download .NET framework: https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48
 
 ## Common password writeback errors
 
